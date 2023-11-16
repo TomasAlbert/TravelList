@@ -8,7 +8,7 @@
 	flex-direction: column;
 	border-radius: 4px;
 }
-/* test */
+
 body {
 	overflow: hidden;
 }
@@ -32,12 +32,53 @@ body {
 }
 header {
 	border-bottom: 1px solid #2646536c;
+
 	background-color: #eeeeee;
 }
 nav {
 	max-width: 1440px;
 	margin: 0 auto;
 	padding: 24px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.hamburger {
+	display: none;
+	position: relative;
+	height: 14px;
+	width: 28px;
+	cursor: pointer;
+	background: none;
+	outline: none;
+	border: 0px;
+}
+.hamburger > div {
+	width: 28px;
+	height: 2px;
+	background-color: #00adb5;
+	transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.hamburger > div:nth-child(1) {
+	position: absolute;
+	top: 0%;
+}
+.hamburger > div:nth-child(2) {
+	position: absolute;
+	top: 50%;
+}
+.hamburger > div:nth-child(3) {
+	position: absolute;
+	top: 100%;
+}
+.hamburger.active > div:nth-child(1) {
+	transform: translateY(6px) rotate(45deg);
+}
+.hamburger.active > div:nth-child(2) {
+	opacity: 0;
+}
+.hamburger.active > div:nth-child(3) {
+	transform: translateY(-8px) rotate(-45deg);
 }
 .form-title {
 	margin-top: 24px;
@@ -47,8 +88,7 @@ nav {
 .leaflet-popup-tip {
 	background-color: #222831;
 }
-.pick-item {
-}
+
 .pick-title {
 	margin-top: 30px;
 	color: #eeeeee;
@@ -112,6 +152,9 @@ main {
 @media only screen and (max-width: 768px) {
 	.sidebar {
 		display: none;
+	}
+	.hamburger {
+		display: block;
 	}
 }
 

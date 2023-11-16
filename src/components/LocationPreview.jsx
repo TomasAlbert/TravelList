@@ -27,32 +27,6 @@ const LocationPreview = ({ location, onAddLocation }) => {
 		fetchData();
 	}, [location]);
 
-	const postPin = async (svg = "") => {
-		try {
-			const response = await fetch("http://localhost:8080/api/pins", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					city: clickedLocationData.city,
-					continent: clickedLocationData.continent,
-					country: clickedLocationData.countryName,
-					lat: location[0],
-					long: location[1],
-					isoName: clickedLocationData.localityInfo.administrative[0].isoName,
-					svg: svg,
-				}),
-			});
-			const createdPin = await response.json();
-			onAddLocation((prev) => [...prev, createdPin]);
-		} catch (err) {
-			console.log(err);
-		} finally {
-			console.log("Post Done");
-		}
-	};
-
 	const submitLocationHandler = async () => {
 		try {
 			setIsLoading(true);
@@ -62,8 +36,21 @@ const LocationPreview = ({ location, onAddLocation }) => {
 
 				const countryInfo = await getCountryInfo(isoName);
 				const svg = countryInfo.flags.svg || "";
+				const existingEntries = JSON.parse(localStorage.getItem("countries")) || [];
+				const entry = {
+					_id: Date.now(),
+					city: clickedLocationData.city,
+					continent: clickedLocationData.continent,
+					country: clickedLocationData.countryName,
+					lat: location[0],
+					long: location[1],
+					isoName: clickedLocationData.localityInfo.administrative[0].isoName,
+					svg: svg,
+				};
+				existingEntries.push(entry);
+				localStorage.setItem("countries", JSON.stringify(existingEntries));
 
-				postPin(svg);
+				onAddLocation((prev) => [...prev, entry]);
 
 				setIsLoading(false);
 
@@ -73,7 +60,21 @@ const LocationPreview = ({ location, onAddLocation }) => {
 			setIsLoading(false);
 
 			if (error.response && error.response.status === 404 && clickedLocationData.city && clickedLocationData.continent && clickedLocationData.countryName) {
-				postPin();
+				const existingEntries = JSON.parse(localStorage.getItem("countries")) || [];
+				const entry = {
+					_id: Date.now(),
+					city: clickedLocationData.city,
+					continent: clickedLocationData.continent,
+					country: clickedLocationData.countryName,
+					lat: location[0],
+					long: location[1],
+					isoName: clickedLocationData.localityInfo.administrative[0].isoName,
+					svg: "",
+				};
+				existingEntries.push(entry);
+				localStorage.setItem("countries", JSON.stringify(existingEntries));
+
+				onAddLocation((prev) => [...prev, entry]);
 				toast.success("Miesto úspešné pridané !", toastOptions);
 			}
 		}

@@ -1,38 +1,28 @@
 /* eslint-disable react/prop-types */
 import { motion, AnimatePresence } from "framer-motion";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
-const toastOptions = {
-	position: "bottom-right",
-	autoClose: 2000,
-	hideProgressBar: false,
-	closeOnClick: true,
-	pauseOnHover: true,
-	draggable: true,
-	progress: undefined,
-	theme: "light",
-};
+// const toastOptions = {
+// 	position: "bottom-right",
+// 	autoClose: 2000,
+// 	hideProgressBar: false,
+// 	closeOnClick: true,
+// 	pauseOnHover: true,
+// 	draggable: true,
+// 	progress: undefined,
+// 	theme: "light",
+// };
 
 const TravelCard = ({ pin, onItemdPinDelete, onCardClick }) => {
 	const handleDelete = async (id) => {
 		try {
-			if (!id) {
-				console.error("Invalid pin ID");
-				return;
-			}
+			const existingEntries = JSON.parse(localStorage.getItem("countries")) || [];
+			const updatedEntries = existingEntries.filter((pin) => pin._id !== id);
 
-			const response = await fetch(`http://localhost:8080/api/pins/${id}`, {
-				method: "DELETE",
-			});
-
-			if (response.ok) {
-				onItemdPinDelete((prev) => prev.filter((pin) => pin._id !== id));
-				toast.success("Miesto úspešné vymazané !", toastOptions);
-			} else {
-				console.error("Failed to delete pin");
-			}
+			localStorage.setItem("countries", JSON.stringify(updatedEntries));
+			onItemdPinDelete((prev) => prev.filter((pin) => pin._id !== id));
 		} catch (error) {
-			console.error("Error fetching pins:", error);
+			console.error("Error deleting entry:", error);
 		}
 	};
 	return (

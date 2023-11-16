@@ -1,0 +1,229 @@
+.leaflet-container {
+	width: 100vw;
+	height: calc(100vh - 83px);
+}
+.form {
+	pointer-events: all;
+	display: flex;
+	flex-direction: column;
+	border-radius: 4px;
+}
+/* */
+body {
+	overflow: hidden;
+}
+.form > input {
+	color: #264653;
+	transition: all 0.3s ease-in-out;
+	outline: none;
+	border: 0px;
+	border-bottom: 1px solid #264653;
+	padding: 10px 0px 6px 0px;
+}
+.form > input:focus {
+	border-bottom: 1px solid #06d6a0;
+}
+
+.form > button:hover {
+	background-color: rgba(12, 78, 102, 0.911);
+}
+.leaflet-popup-content {
+	width: 250px;
+}
+header {
+	border-bottom: 1px solid #2646536c;
+	background-color: #eeeeee;
+}
+nav {
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: 24px;
+}
+.form-title {
+	margin-top: 24px;
+	margin-bottom: 10px;
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+	background-color: #222831;
+}
+.pick-item {
+}
+.pick-title {
+	margin-top: 30px;
+	color: #eeeeee;
+	font-size: 22px;
+	margin-bottom: 20px;
+	font-weight: 500;
+}
+.pick-item h6 {
+	color: #00adb5;
+	font-size: 14px;
+	font-weight: 700;
+	margin-bottom: 4px;
+}
+.pick-item span {
+	display: block;
+	color: #eeeeee;
+	font-size: 22px;
+	font-weight: 300;
+	margin-bottom: 10px;
+}
+.pick-btn {
+	margin-top: 16px;
+	margin-bottom: 10px;
+	background-color: #00adb5;
+	color: #eeeeee;
+	border: 0px;
+	outline: none;
+	font-size: 14px;
+	font-weight: 300;
+	padding: 10px 20px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+}
+.pick-btn:hover {
+	background-color: #eeeeee;
+	color: #00adb5;
+}
+main {
+	display: flex;
+}
+
+.sidebar {
+	height: calc(100vh - 133px);
+	background-color: #eeeeee;
+	overflow-y: auto;
+	padding: 30px 20px;
+	width: 30%;
+	text-align: center;
+}
+@media only screen and (max-width: 1440px) {
+	.sidebar {
+		width: 66%;
+	}
+}
+@media only screen and (max-width: 978px) {
+	.sidebar {
+		width: 100%;
+	}
+}
+@media only screen and (max-width: 768px) {
+	.sidebar {
+		display: none;
+	}
+}
+
+.sidebar h3 {
+	margin-bottom: 20px;
+}
+.travel-card {
+	overflow: hidden;
+	margin-bottom: 14px;
+	position: relative;
+	text-align: left;
+	padding: 30px 30px;
+	background-color: #222831;
+	color: #eeeeee;
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+}
+.travel-card::after {
+	content: "";
+	top: 0;
+	right: 0px;
+	height: 100%;
+	width: 4px;
+	background-color: #00adb5;
+	position: absolute;
+}
+.travel-card .travel-card-info {
+	position: relative;
+	margin-bottom: 6px;
+}
+.travel-card .travel-card-info span {
+	margin-bottom: 6px;
+	font-size: 22px;
+	font-weight: 300;
+	line-height: 1;
+}
+.travel-card .travel-card-info h6 {
+	color: #00adb5;
+	margin-bottom: 4px;
+}
+.travel-card img {
+	opacity: 0.2;
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	transition: all 0.3s ease-in-out;
+}
+.travel-card:hover img {
+	opacity: 0.1;
+	transform: scale(1.2);
+}
+.spinner-container {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.spinner {
+	width: 6rem;
+	height: 6rem;
+	border-radius: 50%;
+	background: conic-gradient(#0000 10%, #ffff);
+	-webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+	animation: rotate 1.5s infinite linear;
+}
+
+@keyframes rotate {
+	to {
+		transform: rotate(1turn);
+	}
+}
+
+.big-pin {
+	position: relative;
+}
+.small-pin {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+}
+
+.small-pin img {
+	width: 100%;
+	height: 100%;
+	margin-top: 14px;
+	margin-bottom: 14px;
+	object-position: center center;
+	transition: all 0.3s ease-in-out;
+}
+.small-pin h2 {
+	color: #eeeeee;
+	text-align: center;
+}
+.delete-item {
+	position: absolute;
+	z-index: 10;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 20px;
+	cursor: pointer;
+	fill: hwb(6 0% 0% / 0.529);
+	transition: 0.3s ease-in-out;
+}
+.travel-card:hover svg {
+	fill: hwb(6 0% 0% / 1);
+}

@@ -1,17 +1,17 @@
 /* eslint-disable react/prop-types */
 import { motion, AnimatePresence } from "framer-motion";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
-// const toastOptions = {
-// 	position: "bottom-right",
-// 	autoClose: 2000,
-// 	hideProgressBar: false,
-// 	closeOnClick: true,
-// 	pauseOnHover: true,
-// 	draggable: true,
-// 	progress: undefined,
-// 	theme: "light",
-// };
+const toastOptions = {
+	position: "bottom-right",
+	autoClose: 2000,
+	hideProgressBar: false,
+	closeOnClick: true,
+	pauseOnHover: true,
+	draggable: true,
+	progress: undefined,
+	theme: "light",
+};
 
 const TravelCard = ({ pin, onItemdPinDelete, onCardClick }) => {
 	const handleDelete = async (id) => {
@@ -21,10 +21,12 @@ const TravelCard = ({ pin, onItemdPinDelete, onCardClick }) => {
 
 			localStorage.setItem("countries", JSON.stringify(updatedEntries));
 			onItemdPinDelete((prev) => prev.filter((pin) => pin._id !== id));
+			toast.success("Miesto úspešné vymazané !", toastOptions);
 		} catch (error) {
 			console.error("Error deleting entry:", error);
 		}
 	};
+
 	return (
 		<AnimatePresence key={pin._id}>
 			<motion.div layout initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }} transition={{ type: "spring", stiffness: 100 }} onClick={() => onCardClick(pin.lat, pin.long)} className="travel-card">

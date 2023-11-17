@@ -15,6 +15,7 @@ const LocationPreview = ({ location, onAddLocation }) => {
 				if (location) {
 					setError(null);
 					const data = await getLocationData(location[0], location[1]);
+					console.log(data);
 					setClickedLocationData(data);
 					setIsLoading(false);
 				}
